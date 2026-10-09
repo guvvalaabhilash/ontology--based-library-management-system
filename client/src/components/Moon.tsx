@@ -1,0 +1,6 @@
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Float, Stars, OrbitControls } from '@react-three/drei';
+import { Suspense, useRef } from 'react';
+import type { Mesh } from 'three';
+function RedMoon(){const ref=useRef<Mesh>(null);useFrame(({clock, pointer})=>{if(ref.current){ref.current.rotation.y=clock.getElapsedTime()*.055+pointer.x*.15;ref.current.rotation.x=pointer.y*.12;}});return <Float speed={1.1} rotationIntensity={.16} floatIntensity={.28}><mesh ref={ref} castShadow><sphereGeometry args={[1.6,96,96]}/><meshStandardMaterial color="#7c252c" roughness={.82} metalness={.08} emissive="#a32927" emissiveIntensity={.28}/></mesh><mesh scale={1.035}><sphereGeometry args={[1.6,64,64]}/><meshBasicMaterial color="#ff6547" transparent opacity={.075}/></mesh></Float>}
+export default function Moon(){return <div className="moon-canvas" aria-label="Animated 3D red moon"><Canvas camera={{position:[0,0,6],fov:40}} dpr={[1,1.5]}><Suspense fallback={null}><ambientLight intensity={.55}/><pointLight position={[3,3,4]} intensity={22} color="#ff9b66"/><pointLight position={[-4,-1,-2]} intensity={7} color="#4de1ff"/><Stars radius={65} depth={30} count={900} factor={2} saturation={.15} fade speed={.35}/><RedMoon/><OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={.16}/></Suspense></Canvas></div>}

@@ -1,0 +1,5 @@
+{
+  "name":"midnight-archive","private":true,"version":"1.0.0","workspaces":["client","server"],
+  "scripts":{"dev":"concurrently -k -n API,WEB -c cyan,magenta \"npm:dev:server\" \"npm:dev:client\"","dev:server":"npm --workspace server run dev","dev:client":"npm --workspace client run dev -- --host 0.0.0.0","seed":"npm --workspace server run seed","build":"npm --workspace server run build && npm --workspace client run build","test":"npm --workspace server run test"},
+  "devDependencies":{"concurrently":"^9.1.2","typescript":"^5.7.3"}
+}

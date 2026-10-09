@@ -1,0 +1,4 @@
+const API='http://localhost:4000/api/v1';
+export type Book={id:number;title:string;authors:string|null;subjects:string|null;year:number|null;language:string|null;coverUrl:string|null;availableCopies:number;publisher?:string|null;description?:string|null;isbn?:string|null;pages?:number|null};
+export async function api<T>(path:string,init:RequestInit={}):Promise<T>{const token=localStorage.getItem('ma-token');const response=await fetch(`${API}${path}`,{...init,headers:{'Content-Type':'application/json',...(token?{Authorization:`Bearer ${token}`}:{ }),...init.headers}});const body=await response.json().catch(()=>({error:{message:'Unexpected server response'}}));if(!response.ok)throw new Error(body.error?.message??`Request failed (${response.status})`);return body as T;}
+export const cover=(url:string|null|undefined)=>url||'';

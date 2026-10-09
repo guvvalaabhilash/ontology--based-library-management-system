@@ -1,0 +1,6 @@
+node_modules
+client/dist
+server/dist
+server/data/*.sqlite*
+server/data/cache/*
+.env

@@ -1,0 +1,57 @@
+@prefix lib: <https://midnight-archive.local/ontology#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+lib:Resource a owl:Class .
+lib:Book a owl:Class ; rdfs:subClassOf lib:Resource .
+lib:Journal a owl:Class ; rdfs:subClassOf lib:Resource .
+lib:Thesis a owl:Class ; rdfs:subClassOf lib:Resource .
+lib:EBook a owl:Class ; rdfs:subClassOf lib:Book .
+lib:AudioBook a owl:Class ; rdfs:subClassOf lib:Book .
+lib:Magazine a owl:Class ; rdfs:subClassOf lib:Resource .
+lib:Agent a owl:Class .
+lib:Person a owl:Class ; rdfs:subClassOf lib:Agent .
+lib:Author a owl:Class ; rdfs:subClassOf lib:Person .
+lib:Member a owl:Class ; rdfs:subClassOf lib:Person .
+lib:Student a owl:Class ; rdfs:subClassOf lib:Member .
+lib:Faculty a owl:Class ; rdfs:subClassOf lib:Member .
+lib:Librarian a owl:Class ; rdfs:subClassOf lib:Person .
+lib:Organization a owl:Class ; rdfs:subClassOf lib:Agent .
+lib:Publisher a owl:Class ; rdfs:subClassOf lib:Organization .
+lib:Department a owl:Class ; rdfs:subClassOf lib:Organization .
+lib:Subject a owl:Class .
+lib:Loan a owl:Class .
+lib:Reservation a owl:Class .
+lib:Fine a owl:Class .
+lib:Branch a owl:Class .
+lib:Shelf a owl:Class .
+lib:Language a owl:Class .
+lib:Genre a owl:Class .
+lib:writtenBy a owl:ObjectProperty ; owl:domain lib:Book ; owl:range lib:Author ; owl:inverseOf lib:authorOf .
+lib:authorOf a owl:ObjectProperty ; owl:inverseOf lib:writtenBy .
+lib:publishedBy a owl:ObjectProperty ; owl:domain lib:Book ; owl:range lib:Publisher .
+lib:hasSubject a owl:ObjectProperty ; owl:domain lib:Resource ; owl:range lib:Subject .
+lib:broader a owl:TransitiveProperty ; owl:domain lib:Subject ; owl:range lib:Subject .
+lib:borrowedBy a owl:ObjectProperty ; owl:domain lib:Loan ; owl:range lib:Member .
+lib:reservedBy a owl:ObjectProperty ; owl:domain lib:Reservation ; owl:range lib:Member .
+lib:locatedOn a owl:ObjectProperty ; owl:domain lib:Book ; owl:range lib:Shelf .
+lib:relatedTo a owl:SymmetricProperty ; owl:domain lib:Resource ; owl:range lib:Resource .
+lib:cites a owl:ObjectProperty ; owl:domain lib:Resource ; owl:range lib:Resource .
+lib:prerequisiteOf a owl:ObjectProperty ; owl:domain lib:Resource ; owl:range lib:Resource .
+lib:translationOf a owl:ObjectProperty ; owl:domain lib:Book ; owl:range lib:Book .
+lib:editionOf a owl:ObjectProperty ; owl:domain lib:Book ; owl:range lib:Book .
+lib:isbn a owl:DatatypeProperty ; rdfs:domain lib:Book .
+lib:title a owl:DatatypeProperty ; rdfs:domain lib:Resource .
+lib:year a owl:DatatypeProperty ; rdfs:domain lib:Resource .
+lib:pages a owl:DatatypeProperty ; rdfs:domain lib:Book .
+lib:availableCopies a owl:DatatypeProperty ; rdfs:domain lib:Book .
+lib:dueDate a owl:DatatypeProperty ; rdfs:domain lib:Loan .
+lib:fineAmount a owl:DatatypeProperty ; rdfs:domain lib:Fine .
+
+lib:ComputerScience a lib:Subject ; skos:prefLabel "Computer Science" .
+lib:ArtificialIntelligence a lib:Subject ; skos:prefLabel "Artificial Intelligence" ; skos:broader lib:ComputerScience .
+lib:MachineLearning a lib:Subject ; skos:prefLabel "Machine Learning" ; skos:broader lib:ArtificialIntelligence .
+lib:NeuralNetworks a lib:Subject ; skos:prefLabel "Neural Networks" ; skos:broader lib:MachineLearning .
